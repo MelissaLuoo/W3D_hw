@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.6">
+	<title>4B37 GitHub HW01</title>
+	<style>
+	a:active{color:#00FF00; text-decoration: none}
+	a:hover{color:#7CFC00; text-decoration: none}
+	a:visited{color:white; text-decoration: none}
+	body {
+		font-family: "Courier New", Arial, 'Heiti TC', 'Microsoft JhengHei', sans-serif;
+		font-size:22px;
+		text-align: center;
+		background-color:#f5f5ff;
+		color: #E0FFFF
+	}
+	</style>
+</head>
+<header>
+	<style>
+	header{
+		background-image: url('snowing.gif');
+		background-repeat: no-repeat;
+		background-attachment: fixed; 
+		background-size: cover;
+		text-align: center;
+	}</style> 
+	<h4><font color="white">Welcome to my house<br>I4B37-Melissa</font>
+	<br><a href="../index.html"><font color="yellow">HOME-INDEX</font></a>
+	</h4>
+	<h1><b><I><font color="white">★☆*.Merry X'Mas.*☆★</font></I></b></h1>
+	<p></p>
+</header>
+<!---->
+<div>
+<button id='power'>Power</button>
+</div>
+
+<div style="color:#36454F;padding:10px;">
+<img src="xmast.jpeg"
+	alt="xmast" style="width:600px;height:600px"
+	title="XmasTreeAndBlink">
+	
+	<div id='bkgd' style="position:absolute; 
+	top: 350px; left: 45vw; width:10vw; 
+	height: 90vh;border-radius: 25px"></div>
+	
+</div>
+
+<!---->
+<header>
+	<font color="white"><h4>____<br>I4B37-Melissa
+	<br>____
+	</h4>
+	<p></p>
+	<h4>[22.10.13 finished]<br>-----
+	<br>pics from:<br>
+	<a href="https://www.rusticpassionbyallieblog.com/flocked-christmas-trees/" target="_blank">christmas-trees</a><br>
+	<a href="https://blisschen.tumblr.com/tagged/minecraft" target="_blank">mincraft-snowing</a><br>
+	-----
+	</h4></font>
+</header>
+<!--
+body style background-color:#7898DE;
+-->
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+var powerOn = true;
+
+$('#power').click (function() {
+  powerOn = !powerOn;
+  
+  if (powerOn === true) {  // false--> true
+     lamps.forEach (function(item) {item.startBlink();});
+  }
+
+});
+
+class Lamp {
+
+  constructor(name) {
+    this.name = name + Lamp.id++;
+    this.myStatus = false;
+    
+    let el = document.createElement ('div');
+    el.id = this.name;
+    let bkgd = document.getElementById('bkgd');
+    bkgd.appendChild(el);
+	
+    this.hue = Math.random()*360;
+	//let min = Math.ceil(min);
+	//let max = Math.floor(max);
+	this.tcycle = Math.floor((Math.random() * 1000) + 100);
+	this.rwh = Math.floor((Math.random() * 20) + 15);
+    // styles
+    el.setAttribute ("style", `background-color: hsl(${this.hue}, 90%, 50%);
+					width:${this.rwh+"px"};height:${this.rwh+"px"};border-radius:80px;`);
+    this.left = Math.random()*0.8;
+    this.top = Math.random()*0.8;
+    el.style.position = "absolute";
+    el.style.left = this.left*100 + '%'; 
+    el.style.top = this.top*100 + '%';
+  }
+
+  toggle() {
+    this.myStatus = ! this.myStatus;
+    
+    if (powerOn) {
+       setTimeout (()=>{this.toggle();}, (Math.floor(Math.random() * 1000) + 200));
+	   
+		if (this.myStatus === true) {
+			$('#'+this.name).css('backgroundColor', `hsl(${this.hue},90%,90%)`);
+		} else {
+			$('#'+this.name).css('backgroundColor', `hsl(${this.hue},75%,25%)`);
+		}
+    }else{
+		$('#'+this.name).css('backgroundColor', `hsl(${this.hue},60%,20%)`);
+	}
+  }
+
+  startBlink() {
+    //var that = this;
+	/*   
+		setInterval(function() {
+		  that.toggle();
+		}, 500);
+	*/
+	setTimeout (()=>{ this.toggle(); }, 0); 
+    //setInterval (that.toggle, 500);   // somehow, it does not work
+  }
+}
+
+Lamp.id = 0; // class variable
+lamps = [];
+
+for (let i = 0; i < 25; i++) {
+   let ll = new Lamp ('light');
+   lamps.push (ll);
+}
+
+lamps.forEach ( function(ll) {ll.startBlink();} );
+</script>
+</body>
+
+</html>
