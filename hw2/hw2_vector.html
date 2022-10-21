@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.6">
+	<title>4B37 3Dweb GitHub HW02</title>
+	<style>
+	a:active{color:#92fd35; text-decoration: none}
+	a:hover{color:#92fd35; text-decoration: none}
+	a:visited{color:#92fd35; text-decoration: none}
+	body {
+		font-family: "Courier New", Arial, 'Heiti TC', 'Microsoft JhengHei', sans-serif;
+		font-size:22px;
+		text-align: center;
+		font-weight: bold;
+		background-color:gray;
+		color: #E0FFFF;
+	}
+	table, th, td {
+		border: 1px solid white;
+		margin-left: auto;
+		margin-right: auto;
+		border-collapse: collapse;
+	}
+	.row {
+	  	width: 60%;
+		height:60%;
+		background-color: black;
+	  	margin: 0 auto;
+	  	&::after {
+			content: '';
+			display: table;
+			clear: both;
+	  	}
+	}
+	.row__container {
+		width: 50%;
+		height:100%;
+	  	float: left;
+	}
+	.col__container {
+		height: 50%;
+	  	float: center;
+	}
+	#Sidebar{
+	  	width: 95%;
+		height:95%;
+		border-radius:30px;
+	 	margin: 0 auto;
+		float: center;
+		font-size:20px;
+		border:3px white dashed;
+		background-color: #818589;
+	}
+	</style>
+</head>
+<header>
+	<style>
+	header{
+		background-image: url('what.jpg');
+		background-repeat: no-repeat;
+		background-attachment: fixed; 
+		background-size: cover;
+		text-align: center;
+	}</style> 
+	<h4><font color="white">HW2：HTML Input & Vector3 API<br>I4B37-Melissa</font>
+	<br><a href="../index.html"><font color="yellow">HOME-INDEX</font></a>
+	</h4>
+	<p></p>
+</header>
+<body bgcolor="#808080">
+<span style="color:white">
+<div class="row">
+  <div class="row__container">
+  <div class="col__container">
+    <div id="Sidebar" style="background-color:#F88B77" >
+		<br>V<br>------<br>
+		x : <input type="number" id="vx" name="fname" maxlength="2" size="10"><br>
+		y : <input type="number" id="vy" name="fname" maxlength="2" size="10"><br>
+		z : <input type="number" id="vz" name="fname" maxlength="2" size="10"><br><br>
+	</div>
+  </div>
+  <br>
+  <div class="col__container">
+    <div id="Sidebar" style="background-color:#6DD1D6">
+		<br>W<br>------<br>
+		x : <input type="number" id="wx" name="fname" maxlength="2" size="10"><br>
+		y : <input type="number" id="wy" name="fname" maxlength="2" size="10"><br>
+		z : <input type="number" id="wz" name="fname" maxlength="2" size="10"><br><br>
+	</div>
+  </div>
+  </div>
+  <div class="row__container">
+    <div id="Sidebar" style="background-color:#6BB06C" >
+		<br><button onclick="Buttontoggle">calculate</button>
+		<br>Inner product<br>V.W<br>------<br>
+		<output name="result1" for="" maxlength="2" size="10" id="inner">V.W</output><br>
+		<br>
+		<br>Vector product<br>V x W<br>------<br>
+<table style="width:70%">
+	<tr style="height:20px">
+		<th style="width:30%">x</th>
+		<th><output name="resultx" size="5" id="outx">.____</output></th> 
+	</tr>
+	<tr style="height:20px">
+		<th style="width:30%">y</th>
+		<th><output name="resulty" size="5" id="outy">.____</output></th> 
+	</tr>
+	<tr style="height:20px">
+		<th style="width:30%">z</th>
+		<th><output name="resultz" size="5" id="outz">.____</output></th> 
+	</tr>
+</table>
+		<br>
+	</div>
+  </div>
+</div>
+</span>
+<script defer src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script defer src="https://threejs.org/build/three.min.js" type="text/javascript"></script>
+<!--
+border-radius: 50% 20% / 10% 40%;
+-->
+<script defer type="text/javascript">
+$('#Buttontoggle').click( function(){
+	var vx = $("#vx").val();
+	var vy = $("#vy").val();
+	var vz = $("#vz").val();
+	var wx = $("#wx").val();
+	var wy = $("#wy").val();
+	var wz = $("#wz").val();
+
+	const v = new THREE.Vector3();
+	const w = new THREE.Vector3();
+	v.set(vx,vy,vz);
+	w.set(wx,wy,wz);
+	
+	var vc = v.clone();
+	var wc = w.clone();
+	const dot = vc.dot(wc);
+	const u = new THREE.Vector3();
+	u.crossVectors(vc, wc);
+	
+	$("#inner").text(dot);
+	$("#outx").text(u.getComponent(0));
+	$("#outy").text(u.getComponent(1));
+	$("#outz").text(u.getComponent(2));
+});
+</script>
+</body>
+</html>
