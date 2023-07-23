@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+
 <?php
 session_start();
 
@@ -88,7 +91,7 @@ $_SESSION['History'] = $arrHistory;
 
 ?>
 
-<html>
+
 <head>
 <title>Guess-Number</title>
 <style type="text/css">
